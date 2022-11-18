@@ -1,0 +1,81 @@
+% \usepackage[top=3.0cm, bottom=3.0cm, left=3.5cm, right=3.5cm]{geometry}
+\usepackage[top=3.0cm, bottom=3.0cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{latexsym}
+\usepackage{minted}
+\usepackage{setspace}
+\usepackage{natbib}
+\usepackage[hiragino-pron]{pxchfon}
+
+\setlength\intextsep{30pt}
+\setlength\textfloatsep{20pt}
+
+
+\makeatletter
+% 表紙変数定義
+\def\titleJP#1{\def\@titlejp{#1}}
+\def\titleEN#1{\def\@titleen{#1}}
+\def\school{武蔵野美術大学}
+
+% 学部生用マクロ
+\def\degree{学部卒業論文}
+\def\date{2021年12月}
+\def\affiliation{所属：造形構想学部クリエイティブイノベーション学科}
+\def\info#1#2{\def\@info{学籍番号・氏名：#1 ・#2}}
+
+% 院生用マクロ
+% \def\degree{大学院修士学位論文}
+% \def\affiliation{所属：造形構想専攻}
+% \def\info#1#2{\def\@info{学籍番号・氏名：#1 ・#2}}
+% \def\mainChecker#1{\def\@mainChecker{指導教員(主査)：#1}}
+% \def\subChecker#1{\def\@subChecker{指導教員(副査)：#1}}
+
+% 表紙用のマクロ
+\def\maketitle{
+    \begin{center}
+    \fontsize{12pt}{0}{\gtfamily\bfseries{ \school }}\par
+    \vspace{2mm}
+    \fontsize{12pt}{0}{\gtfamily\bfseries{ \degree}} \par
+    \vspace{50mm}
+    \fontsize{30truept}{40pt}\selectfont\textbf{\@titlejp}\par
+    \vspace{10mm}
+    \begin{spacing}{0.7}
+    \fontsize{16pt}{1pt}{\sffamily\textsf\@titleen }\par
+    \end{spacing}
+    \vfill
+    \fontsize{14pt}{0}\gtfamily\bfseries{\date}\par
+    \end{center}
+    
+    \vspace{50mm}
+    {\fontsize{14pt}{0}\selectfont\textsf{\rightline{\affiliation}} \par }
+    \vspace{2mm}
+    {\fontsize{14pt}{0}\selectfont\textsf{\rightline{\@info}}  \par  }
+    % 院生のみコメントを外す項目
+    % \vspace{2mm}
+    % {\fontsize{14pt}{0}\selectfont\textsf{\rightline{\@mainChecker}} \par }
+    % \vspace{2mm}
+    % {\fontsize{14pt}{0}\selectfont\textsf{\rightline{\@subChecker}} } 
+    
+    \thispagestyle{empty}
+    \addtocounter{page}{-1}
+    \newpage
+}
+
+% 行数文字数指定マクロ
+\def\mojiparline#1{
+    \newcounter{mpl}
+    \setcounter{mpl}{#1}
+    \@tempdima=\linewidth
+    \advance\@tempdima by-\value{mpl}zw
+    \addtocounter{mpl}{-1} \divide\@tempdima by \value{mpl}
+    \advance\kanjiskip by\@tempdima
+    \advance\parindent by\@tempdima
+}
+\makeatother
+
+\def\linesparpage#1{
+    \baselineskip=\textheight
+    \divide\baselineskip by #1
+}
